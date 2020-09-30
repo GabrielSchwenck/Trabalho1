@@ -8,7 +8,8 @@ Tema: Biblioteca
 ETAPA 1
 
 
-Nome do campo	tipo	Descrição
+|Nome do campo|tipo|Descrição|
+|-------------|----|---------|
 nome_do_livro	Cadeia de caracteres	Nome do Livro
 editora	Cadeia de caracteres	Nome da editora
 autor	Cadeia de caracteres	Nome do autor
