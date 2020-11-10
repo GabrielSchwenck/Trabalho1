@@ -22,3 +22,4 @@ data_locacao|Cadeia de caracteres|Data em que o livro foi alugado
 data_devolucao|Cadeia de caracteres|Data de devolução do livro
 nome_aluguel|Cadeira de caracteres|Nome da pessoa que alugou o livro
 codigo_aluguel|Inteiro|codigo da pessoa que alugou o livro
+codigo_la|Inteiro|codigo do livro alugado
