@@ -1,0 +1,383 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+#define VAL1 100
+#define VAL2 15
+
+int main()
+{
+    setlocale(LC_ALL, "Portuguese");
+    system("color 1F");
+
+    char nome_do_livro[VAL1], editora[VAL1], autor[VAL1], data_locacao[VAL2],data_devolucao[VAL2],nome_aluguel[VAL1];
+    int quantidade,status=1,cod_prateleira,cod_livro,codigo_aluguel,codigo_la,codigo_devolu_usuario,codigo_dev_livro,conf;
+
+    printf("\n--------------------------------------------------------------------\n                    BIBLIOTECA CEFET-MG\n--------------------------------------------------------------------\n\n");
+
+    int menu=1,buscaL,buscaU,menuE;
+
+    while (menu!=0)
+    {
+        system("color 1F");
+        printf("\nMENU:\n\n1 - Cadastro de Livro\n2 - Cadastro de Usuário\n3 - Consulta ou Edição de Livro\n4 - Consulta ou Edição de Usuário\n5 - Devolução de livros\n0 - Sair\n\nDigite o valor desejado: ");
+        scanf("%d",&menu);
+        getchar();
+
+        switch(menu)
+        {
+            case 1:
+                system("cls");
+                printf("\nCADASTRO DE LIVRO\n\nDigite o nome do livro: ");
+                gets(nome_do_livro);
+                printf("\nDigite o nome da editora: ");
+                gets(editora);
+                printf("\nDigite o nome do autor: ");
+                gets(autor);
+                printf("\nDigite o código da prateleira: ");
+                scanf("%d",&cod_prateleira);
+                printf("\nDigite o código do livro: ");
+                scanf("%d",&cod_livro);
+                printf("\nDigite a quantidade disponivel: ");
+                scanf("%d",&quantidade);
+                if ((quantidade != 0)&&(quantidade>=1))
+                {
+                    system("color 2F");
+                    printf("\n\nLIVRO CADASTRADO! PRESSIONE ENTER PARA CONTINUAR!\n");
+                    getchar();
+                    getchar();
+                    system("cls");
+                    break;
+                }
+                else
+                {
+                    system("color 40");
+                    printf("\nQUANTIDADE INVÁLIDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                    getchar();
+                    getchar();
+                    system("cls");
+                    break;
+                }
+            case 2:
+                system("cls");
+                printf("\nCADASTRO DE USUÁRIO\n\nDigite o nome do usuário: ");
+                gets(nome_aluguel);
+                printf("\nDigite o código do usuário:");
+                scanf("%d",&codigo_aluguel);
+                printf("\nDigite o código do livro alugado:");
+                scanf("%d",&codigo_la);
+                if (codigo_la == cod_livro)
+                {
+                    if (quantidade>0)
+                    {
+                        quantidade = quantidade - 1;
+                        if (quantidade == 0)
+                        {
+                            status = 0;
+                        }
+                        printf("\nDigite a data do aluguel: ");
+                        getchar();
+                        gets(data_locacao);
+                        printf("\nDigite a data de devolução: ");
+                        gets (data_devolucao);
+                        system("color 2F");
+                        printf("\n\nUSUÁRIO CADASTRADO! PRESSIONE ENTER PARA CONTINUAR!\n");
+                        getchar();
+                        system("cls");
+                        break;
+                    }
+                    else
+                    {
+                    system("color 40");
+                    printf("\nQUANTIDADE INDISPONÍVEL!  PRESSIONTE ENTER PARA CONTINUAR!");
+                    getchar();
+                    getchar();
+                    system("cls");
+                    break;
+                    }
+                }
+                else
+                {
+                    system("color 40");
+                    printf("\nCÓDIGO INEXISTENTE!  PRESSIONTE ENTER PARA CONTINUAR!");
+                    getchar();
+                    getchar();
+                    system("cls");
+                    break;
+                }
+            case 3:
+                system("cls");
+                printf("\nDigite o código do livro: ");
+                scanf("%d",&buscaL);
+                if (buscaL == cod_livro)
+                {
+                    system("cls");
+                    printf("DADOS:\n\nNome do livro: ");
+                    puts(nome_do_livro);
+                    printf("\nNome da editora: ");
+                    puts(editora);
+                    printf("\nNome do autor: ");
+                    puts(autor);
+                    printf("\nCódigo da prateleira: %d",cod_prateleira);
+                    printf("\n\nCódigo do livro: %d",cod_livro);
+                    if (status != 0)
+                    {
+                        printf("\n\nExistem %d unidades disponíveis!",quantidade);
+                    }
+                    else
+                    {
+                        printf("\n\nTodos os livros estão alugados!");
+                    }
+                    printf("\n\nDigite 0 para editar ou outro valor para retornar ao menu: ");
+                    scanf("%d",&menuE);
+                    if (menuE == 0)
+                    {
+                        system("cls");
+                        printf("ALTERAÇÃO\n\n1 - Nome do livro\n2 - Nome da editora\n3 - Nome do autor\n4 - Código da prateleira\n5 - Código do livro\n6 - Quantidade disponível\n\nDigite o número da informação que deseja alterar: ");
+                        scanf("%d",&menuE);
+                        getchar();
+                        switch(menuE)
+                        {
+                            case 1:
+                                printf("\n\nDigite o  novo nome do livro: ");
+                                gets(nome_do_livro);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                            case 2:
+                                printf("\n\nDigite o novo nome da editora: ");
+                                gets(editora);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                             case 3:
+                                printf("\n\nDigite o novo nome do autor: ");
+                                gets(autor);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                            case 4:
+                                printf("\n\nDigite o novo código da prateleira: ");
+                                scanf("%d",&cod_prateleira);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                            case 5:
+                                printf("\n\nDigite o novo código do livro: ");
+                                scanf("%d",&cod_livro);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                            case 6:
+                                printf("\n\nDigite a nova quantidade disponível: ");
+                                scanf("%d",&quantidade);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                            default:
+                                system("color 40");
+                                printf("\n\nCÓDIGO INEXISTENTE!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+
+                        }
+                    }
+                    else
+                    {
+                        system("color 2F");
+                        printf("\n\nCONSULTA REALIZADA! PRESSIONE ENTER PARA CONTINUAR!\n");
+                        getchar();
+                        getchar();
+                        system("cls");
+                        break;
+                    }
+
+                }
+                else
+                {
+                    system("color 40");
+                    printf("\nCÓDIGO INEXISTENTE!  PRESSIONTE ENTER PARA CONTINUAR!");
+                    getchar();
+                    getchar();
+                    system("cls");
+                    break;
+                }
+            case 4:
+                system("cls");
+                printf("\nDigite o código do usuário: ");
+                scanf("%d",&buscaU);
+                if (buscaU == codigo_aluguel)
+                {
+                    system("cls");
+                    printf("DADOS:\n\nNome do Usuário: ");
+                    puts(nome_aluguel);
+                    printf("Código do usuário: %d",codigo_aluguel);
+                    printf("\nCódigo do livro alugado: %d",codigo_la);
+                    printf("\nData do aluguel: ");
+                    puts(data_locacao);
+                    printf("Data da devolução: ");
+                    puts(data_devolucao);
+                    printf("\n\nDigite 0 para editar ou outro valor para retornar ao menu: ");
+                    scanf("%d",&menuE);
+                    if (menuE == 0)
+                    {
+                        system("cls");
+                        printf("ALTERAÇÃO\n\n1 - Nome do usuário\n2 - Código do usuário\n3 - Código do livro alugado\n4 - Data do aluguel\n5 - Data da devolução\n\nDigite o número da informação que deseja alterar: ");
+                        scanf("%d",&menuE);
+                        getchar();
+                        switch(menuE)
+                        {
+                            case 1:
+                                printf("\n\nDigite o  novo nome do usuário: ");
+                                gets(nome_aluguel);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                            case 2:
+                                printf("\n\nDigite o novo código do usuário: ");
+                                scanf("%d",&codigo_aluguel);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                             case 3:
+                                printf("\n\nDigite o novo código do livro alugado: ");
+                                scanf("%d",&codigo_la);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                            case 4:
+                                printf("\n\nDigite a nova data do alugel: ");
+                                gets(data_locacao);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                            case 5:
+                                printf("\n\nDigite a nova data de devolução: ");
+                                gets (data_devolucao);
+                                system("color 2F");
+                                printf("\n\nALTERAÇÃO CONCLUÍDA!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+                            default:
+                                system("color 40");
+                                printf("\n\nCÓDIGO INEXISTENTE!  PRESSIONTE ENTER PARA CONTINUAR!");
+                                getchar();
+                                system("cls");
+                            break;
+
+                        }
+                    }
+                    else
+                    {
+                        system("color 2F");
+                        printf("\n\nCONSULTA REALIZADA! PRESSIONE ENTER PARA CONTINUAR!\n");
+                        getchar();
+                        getchar();
+                        system("cls");
+                        break;
+                    }
+
+                }
+                else
+                {
+                    system("color 40");
+                    printf("\nCÓDIGO INEXISTENTE!  PRESSIONTE ENTER PARA CONTINUAR!");
+                    getchar();
+                    getchar();
+                    system("cls");
+                    break;
+                }
+            case 5:
+                    system("cls");
+                    printf("\nDigite o código do aluguel do usuário: ");
+                    scanf("%d",&codigo_devolu_usuario);
+                    if(codigo_devolu_usuario==codigo_aluguel)
+                    {
+                            printf("\nAgora digite o código do livro: ");
+                            scanf("%d",&codigo_dev_livro);
+                            if(codigo_dev_livro==codigo_la)
+                            {
+                                system("cls");
+                                printf("DADOS:\n\nNome do livro: %s \nCódigo do livro %d \nAlugado por %s\n",nome_do_livro,cod_livro,nome_aluguel);
+                                printf("\nOs dados estao corretos?\nSIM - 1 \nNÃO - Outro valor\nDigite o valor: ");
+                                scanf("%d",&conf);
+                                if(conf==1)
+                            {
+                                    system("color 2F");
+                                    printf("\nLIVRO DEVOLVIDO COM SUCESSO! PRESSIONE ENTER PARA CONTINUAR!\n");
+                                    codigo_la = 0;
+                                    quantidade+=1;
+                                    status = 1;
+                                    getchar();
+                                    getchar();
+                                    system ("cls");
+                                    break;
+                            }
+                                else
+                            {
+                                    system("color 40");
+                                    printf("\nDEVOLUÇÃO NÃO CONCLUÍDA! PRESSIONE ENTER PARA CONTINUAR!\n");
+                                    getchar();
+                                    getchar();
+                                    system("cls");
+                                    break;
+                            }
+
+                            }
+                            else
+                            {
+                            system("color 40");
+                            printf("\nDADOS INCORRETOS! PRESSIONTE ENTER PARA CONTINUAR!\n");
+                            getchar();
+                            getchar();
+                            system("cls");
+                            break;
+                        }
+                }
+                else
+                {
+                    system("color 40");
+                    printf("\nDEVOLUÇÃO NÃO CONCLUÍDA! PRESSIONTE ENTER PARA CONTINUAR!\n");
+                    getchar();
+                    getchar();
+                    system("cls");
+                    break;
+                }
+            case 0:
+                        system("color 2F");
+                        printf("\n\nOBRIGADO POR USAR! PRESSIONE ENTER PARA CONTINUAR!\n");
+
+            break;
+            default:
+                    system("color 40");
+                    printf("\nVALOR INEXISTENTE!  PRESSIONTE ENTER PARA CONTINUAR!");
+                    getchar();
+                    system("cls");
+            break;
+
+        }
+    }
+
+}
